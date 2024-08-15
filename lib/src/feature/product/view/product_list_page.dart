@@ -1,9 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gemicates_machine_task/src/feature/product/controller/product_controller.dart';
 import 'package:gemicates_machine_task/src/feature/product/view/widgets/product_card.dart';
+import 'package:provider/provider.dart';
 
-class ProductListPage extends StatelessWidget {
+class ProductListPage extends StatefulWidget {
   const ProductListPage({super.key});
+
+  @override
+  State<ProductListPage> createState() => _ProductListPageState();
+}
+
+class _ProductListPageState extends State<ProductListPage> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ProductController>(context, listen: false)
+          .fetchAllProducts(onRefresh: true);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,20 +70,26 @@ class ProductListPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Center(
-                    child: Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
-                      children: List.generate(
-                        10,
-                        (index) => const ProductCard(),
+              Consumer<ProductController>(
+                builder: (context, value, child) {
+                  return Expanded(
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Center(
+                        child: Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: List.generate(
+                            value.products.length,
+                            (index) => ProductCard(
+                              product: value.products[index],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ],
           ),

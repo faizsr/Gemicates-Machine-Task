@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gemicates_machine_task/src/feature/product/controller/product_controller.dart';
+import 'package:gemicates_machine_task/src/feature/product/model/product_model.dart';
+import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
-    // required this.product,
+    required this.product,
   });
 
-  // final ProductEntity product;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +34,18 @@ class ProductCard extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                // color: const Color.fromARGB(255, 241, 245, 255),
-                // image: DecorationImage(
-                //   image: NetworkImage(),
-                //   fit: BoxFit.cover,
-                // ),
+                image: DecorationImage(
+                  image: NetworkImage(product.thumbnail),
+                  fit: BoxFit.cover,
+                ),
                 borderRadius: BorderRadius.circular(10),
               ),
               height: 160,
             ),
             const SizedBox(height: 15),
             Text(
-              'title',
-              style: TextStyle(
+              product.title,
+              style: const TextStyle(
                 fontSize: 14.5,
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
@@ -51,31 +53,29 @@ class ProductCard extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 5),
             Text(
-              'product.description',
+              product.brand,
               maxLines: 3,
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 10),
             Row(
               children: [
                 discountWidget(),
                 Text(
-                  "\$599",
+                  "\$${product.discountedPrice.round()}",
                   style: const TextStyle(
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
+                    fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  "10% off",
+                  "${product.discountPrecentage.round()}%",
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
-                    color: Colors.amberAccent,
-                    fontStyle: FontStyle.italic,
+                    color: Colors.red,
                   ),
                 ),
               ],
@@ -86,26 +86,25 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget discountWidget() {
-    // return Consumer<ProductController>(
-    // builder: (context, value, child) {
-    return
-        // value.discountStatus
-        // ?
-        Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: Text(
-        "\$799",
-        style: const TextStyle(
-          fontSize: 12,
-          color: Colors.grey,
-          fontWeight: FontWeight.w500,
-          fontStyle: FontStyle.italic,
-          decoration: TextDecoration.lineThrough,
-        ),
-      ),
-      // ); // : const SizedBox();
-      // },
+  Consumer<ProductController> discountWidget() {
+    return Consumer<ProductController>(
+      builder: (context, value, child) {
+        return value.discountStatus
+            ? Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Text(
+                  "\$${product.price.round()}",
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                    fontStyle: FontStyle.italic,
+                    decoration: TextDecoration.lineThrough,
+                  ),
+                ),
+              )
+            : const SizedBox();
+      },
     );
   }
 }

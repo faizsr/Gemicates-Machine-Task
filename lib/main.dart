@@ -3,6 +3,7 @@ import 'package:gemicates_machine_task/src/feature/auth/controller/auth_controll
 import 'package:gemicates_machine_task/src/feature/auth/model/services/auth_service.dart';
 import 'package:gemicates_machine_task/src/feature/auth/view/signin_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:gemicates_machine_task/src/feature/product/controller/product_controller.dart';
 import 'package:gemicates_machine_task/src/feature/product/view/product_list_page.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthController(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProductController(),
+        ),
       ],
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
