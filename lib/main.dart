@@ -34,15 +34,16 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: const Color.fromARGB(255, 241, 245, 255),
           ),
           home: FutureBuilder<bool>(
-              future: authService.getUserStatus(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return snapshot.data ?? false
-                      ? const ProductListPage()
-                      : const SignInPage();
-                }
-                return const SignInPage();
-              }),
+            future: authService.getUserStatus(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return snapshot.data ?? false
+                    ? const ProductListPage()
+                    : const SignInPage();
+              }
+              return const SignInPage();
+            },
+          ),
         ),
       ),
     );
