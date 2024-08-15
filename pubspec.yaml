@@ -34,6 +34,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  page_transition: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -73,13 +74,16 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Poppins
+    - family: OverusedGrotesk
       fonts:
-        - asset: assets/fonts/Poppins-Bold.ttf
-        - asset: assets/fonts/Poppins-ExtraBold.ttf
-        - asset: assets/fonts/Poppins-Light.ttf
-        - asset: assets/fonts/Poppins-Medium.ttf
-        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/OverusedGrotesk-Black.otf
+        - asset: assets/fonts/OverusedGrotesk-Bold.otf
+        - asset: assets/fonts/OverusedGrotesk-Book.otf
+        - asset: assets/fonts/OverusedGrotesk-ExtraBold.otf
+        - asset: assets/fonts/OverusedGrotesk-Light.otf
+        - asset: assets/fonts/OverusedGrotesk-Medium.otf
+        - asset: assets/fonts/OverusedGrotesk-Roman.otf
+        - asset: assets/fonts/OverusedGrotesk-SemiBold.otf
 
   #   - family: Trajan Pro
   #     fonts:

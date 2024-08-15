@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gemicates_machine_task/src/feature/auth/view/login_page.dart';
+import 'package:gemicates_machine_task/src/feature/auth/view/signin_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +10,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Gemicates',
-      theme: ThemeData(
-        fontFamily: 'Poppins',
-        scaffoldBackgroundColor: Colors.white,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Gemicates',
+        theme: ThemeData(
+          fontFamily: 'OverusedGrotesk',
+          scaffoldBackgroundColor: const Color.fromARGB(255, 241, 245, 255),
+        ),
+        home: const SignInPage(),
       ),
-      home: const LoginPage(),
     );
   }
 }
